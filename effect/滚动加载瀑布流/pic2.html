@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <title>带有分散效果的瀑布流</title>
+    <style type="text/css">
+            *{padding: 0;margin:0;}
+    #main{
+        position: relative;
+    }
+    .pin{
+        padding: 15px 0 0 15px;
+        float:left;
+    }
+    .box{
+        padding: 10px;
+        border:1px solid #ccc;
+        box-shadow: 0 0 6px #ccc;
+        border-radius: 5px;
+    }
+    .box img{
+        width:220px;
+        height:auto;
+    }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="pin">
+        <div class="box">
+            <img src="1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="4.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="4.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="4.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="4.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="4.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="1.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="2.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="3.jpg"/>
+        </div>
+    </div>
+    <div class="pin">
+        <div class="box">
+            <img src="4.jpg"/>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $( window ).on( "load", function(){
+        // 调用waterfall函数
+        waterfall("#main",".pin");
+
+        var dataInt={'data':[{'src':'1.jpg'},{'src':'2.jpg'},{'src':'3.jpg'},{'src':'4.jpg'}]};
+        window.onscroll=function(){
+            // 拖动滚动条时
+            if(checkscrollside()){
+                $.each( dataInt.data, function( index, value ){
+                    var $newPin = $('<div>').addClass('pin').appendTo($( "#main" ));
+                    var $newBox = $('<div>').addClass('box').appendTo($newPin);
+                    $('<img>').attr('src',$( value).attr( 'src') ).appendTo($newBox);
+                })
+
+                waterfall("#main",".pin");
+            }
+        }
+    });
+    function waterfall(parent,pin){
+        // 计算及定位数据块显示分散效果
+        var $picList = $(parent+">"+pin);
+        var colWidth = $picList.eq(0).outerWidth();
+        var col = Math.floor($( window ).width()/colWidth);
+        $(parent).css({
+            "width":colWidth*col,
+            "margin":"0 auto"
+        });
+        var str = [];
+        $picList.each(function(index,value){
+            var pinH = $picList.eq(index).height();
+            if(index<col){
+                str[index] = pinH;
+            }else{
+                var minH = Math.min.apply(null,str);
+                var location = $.inArray(minH,str);
+                $( value).css({
+                    'position':'absolute',
+                    'top':minH+15,
+                    'left':$picList.eq(location).position().left
+                })
+                str[location] +=  $picList.eq(index).height()+15;
+            }
+        })
+    }
+
+    function checkscrollside(){
+        // 检测是否具备了加载数据块的条件
+        var $picList = $("#main>.pin");
+        var picH = $picList.last().get(0).offsetTop + Math.floor($picList.last().height()/2);
+        var scrollTop = $( window ).scrollTop();//注意解决兼容性
+        var documentH = $( document ).height();//页面高度
+        console.log(scrollTop);
+        return (picH < scrollTop + documentH ) ? true : false;
+    }
+
+</script>
+</html>
