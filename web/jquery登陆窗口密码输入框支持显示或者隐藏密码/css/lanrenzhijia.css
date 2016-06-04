@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* 代码整理：懒人之家 www.lanrenzhijia.com */
+* { margin: 0; padding: 0; list-style:none;}
+body { font: 14px Arial, sans-serif; color: #333;}
+
+input { font-family: Arial, sans-serif;}
+.login { width: 270px; margin: 0 auto; padding: 30px 40px; background-color: #f7f7f7;}
+.login ul { list-style-type: none;}
+.login li { padding: 10px 0; overflow: hidden;}
+.login .li3, .login .li5 { text-align: right; font-size: 12px;}
+.login .li3 input { width: 13px; height: 13px; margin: 0 3px 0 10px; vertical-align: middle;}
+.login .submit { display: block; width: 100%; padding: 6px 0; border: 0 none; color: #fff; background-color: #4d90fe; cursor: pointer;}
+#email, #password { width: 214px; padding: 5px; border: 1px solid #ccc;}
+.forgot { color: #333;}
+/* 代码整理：懒人之家 www.lanrenzhijia.com */
+

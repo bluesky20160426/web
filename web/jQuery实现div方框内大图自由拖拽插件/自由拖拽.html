@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: #555;
+				color: #fff;
+			}
+			
+			a {
+				color: #fff;
+				text-decoration: none;
+				outline: none;
+			}
+			
+			a:hover {
+				color: #fff;
+				text-decoration: underline;
+			}
+			
+			a img {
+				border: none;
+			}
+			
+			#imageView_container {
+				border: 2px solid #000;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			
+			#imageView_container.iv-loading {
+				border: 2px solid #f00;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="imageView_container">
+			<img src="http://demo.lanrenzhijia.com/2014/pic1118/image-800x500.jpg" rel="http://demo.lanrenzhijia.com/2014/pic1118/image-1680x1050.jpg"/>
+		</div>
+	</body>
+	<script src="http://www.lanrenzhijia.com/ajaxjs/jquery.js"></script>
+	<script src="http://www.lanrenzhijia.com/ajaxjs/jquery.imageView.js"></script>
+	<script type="text/javascript">
+		$(function() {
+				$('#imageView_container').imageView({
+					width: 800,
+					height: 500
+				});
+			});
+	</script>
+</html>
